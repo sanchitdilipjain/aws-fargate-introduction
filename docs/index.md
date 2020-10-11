@@ -2,14 +2,9 @@
 
 <img src="images/image1.jpeg" class="inline"/>
                         
-**A scheduled (cron-like) task**
-  
-  - This all begins with my need to schedule a script to crawl some stock data weekly. In a web service or application, we always have some needs to do a job at   fixed times, dates, or intervals.
-  - The most famous job scheduler is <a href="https://en.wikipedia.org/wiki/Cron">cron</a>, which provides a utility for scheduling repetitive tasks on Linux/Unix systems. Cron Expression is commonly used to let you define when tasks should be run. You can check this website <a href="https://crontab.guru/">crontab.guru</a> to configure the cron expression. There are different variants of Cron Expression used in systems, like Jenkins, Kubernetes CronJob, Fargate Scheduled Task etc. Make sure you check its instructions before use.
-
 **AWS Fargate**
 
-  - Fargate is a new managed service for container orchestration provided by AWS. In ECS, we always need to provision the EC2 cluster first before running services. Also, there is an operating cost to maintain the cluster. When there is a change, we need to change both the underlying cluster (the number of EC2 instances) and services (the number of tasks). In Fargate, you don’t need to operate the cluster. You can image Fargate as an unlimited cluster that you can use and you pay as you use.
+  - Fargate is a managed service for container orchestration provided by AWS. In ECS, we always need to provision the EC2 cluster first before running services. Also, there is an operating cost to maintain the cluster. When there is a change, we need to change both the underlying cluster (the number of EC2 instances) and services (the number of tasks). In Fargate, you don’t need to operate the cluster. You can image Fargate as a serverless unlimited cluster that you can use and you pay as you use.
 
   - Fargate also provides the ability to run scheduled tasks via CloudWatch Events.
 
@@ -18,14 +13,12 @@
       - Airflow (using Celery scheduler)
       - Jenkins
 
-  - Kubernetes CronJob needs to operate a Kubernetes cluster (I haven’t tried AWS EKS yet). Airflow needs to run a machine or a cluster and also is tied to Python. Jenkins can be used as a job scheduler but it is not designed for this.
+  - Kubernetes CronJob needs to operate a Kubernetes cluster. Airflow needs to run a machine or a cluster and also is tied to Python. Jenkins can be used as a job scheduler but it is not designed for this.
 
   - The major advantages of using Fargate I think are:
       - No operation code and cost
       - Support Docker containers
       - Easy for scaling up
-
-  - Plus, Fargate is an extension to ECS, which I am very familiar with.
   
 **Create a Fargate scheduled task**
 
