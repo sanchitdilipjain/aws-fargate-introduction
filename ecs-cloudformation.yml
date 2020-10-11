@@ -1,0 +1,57 @@
+AWSTemplateFormatVersion: '2010-09-09'
+ Description: >
+   Scheduled ECS task.
+ Parameters:
+   ECSClusterArn:
+     Type: String
+   ScheduledWorkerTaskArn:
+     Type: String
+
+ Resources:
+   StockCrawlerTaskSchedule:
+     Type: AWS::Events::Rule
+     Properties:
+       Description: "Cron every 30 mins"
+       Name: "cron"
+       ScheduleExpression: "cron(0/30 * * * ? *)"
+       State: DISABLED
+       Targets:
+         - Id: cron-fargate-task
+           RoleArn: !GetAtt TaskSchedulerRole.Arn
+           Arn: !Ref ECSClusterArn
+           EcsParameters:
+             TaskCount: 1
+             TaskDefinitionArn: !Ref ScheduledWorkerTaskArn
+   TaskSchedulerRole:
+     Type: AWS::IAM::Role
+     Properties:
+       AssumeRolePolicyDocument:
+         Version: "2012-10-17"
+         Statement:
+           -
+             Effect: "Allow"
+             Principal:
+               Service:
+                 - "events.amazonaws.com"
+             Action:
+               - "sts:AssumeRole"
+       Path: /
+       Policies:
+         - PolicyDocument:
+             Statement:
+               - Effect: "Allow"
+                 Condition:
+                   ArnEquals:
+                     ecs:cluster: !Ref ECSClusterArn
+                 Action: "ecs:RunTask"
+                 Resource: "*"
+               - Effect: "Allow"
+                 Condition:
+                   ArnEquals:
+                     ecs:cluster: !Ref ECSClusterArn
+                 Action:
+                   - "iam:ListInstanceProfiles"
+                   - "iam:ListRoles"
+                   - "iam:PassRole"
+                 Resource: "*"
+           PolicyName: "TaskSchedulerPolicy"    
