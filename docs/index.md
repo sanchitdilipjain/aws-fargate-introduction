@@ -44,7 +44,7 @@
            LogGroupName:
              Type: String
          Resources:
-           StockDataBucket:
+           CronBucket:
              Type: AWS::S3::Bucket
              Properties:
                BucketName: !Ref BucketName
@@ -140,7 +140,7 @@
              Type: String
 
          Resources:
-           StockCrawlerTaskSchedule:
+           CronTaskSchedule:
              Type: AWS::Events::Rule
              Properties:
                Description: "Cron every 30 mins"
@@ -194,8 +194,8 @@
     - Edit
       - Launch Type: Fargate
       - Platform Version: LATEST
-      - Subnets: subnet-001, subnet-002
-      - Security Group: sg-001
+      - Subnets: subnet-1, subnet-2
+      - Security Group: sg-1
       - Auto-assign Public IP (MUST): ENABLED
       - Use existing role: TaskSchedulerRole
     - Enable the task
