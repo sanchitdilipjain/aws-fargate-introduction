@@ -7,7 +7,7 @@ AWSTemplateFormatVersion: '2010-09-09'
    LogGroupName:
      Type: String
  Resources:
-   StockDataBucket:
+  CronBucket:
      Type: AWS::S3::Bucket
      Properties:
        BucketName: !Ref BucketName
