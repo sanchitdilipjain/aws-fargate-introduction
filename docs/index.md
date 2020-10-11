@@ -97,7 +97,7 @@
     
         task-definition:
            export TAG=${TAG}
-           ecs-cli compose --project-name stock-crawler --file ./deploy/docker-compose.yml --ecs-params ./deploy/ecs-params.yml --region us-east-1 create --launch-type FARGATE
+           ecs-cli compose --project-name cron --file ./deploy/docker-compose.yml --ecs-params ./deploy/ecs-params.yml --region us-east-1 create --launch-type FARGATE
            
     File ./deploy/docker-compose.yml:
     
