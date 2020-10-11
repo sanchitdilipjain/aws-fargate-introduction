@@ -195,8 +195,8 @@
                          Resource: "*"
                    PolicyName: "TaskSchedulerPolicy"          
 
-    - Note: From EcsParameters, CloudFormation in Step 5 should support specify parameters, such as LaunchType, NetworkConfiguration, PlatformVersion, for Fargate tasks. However, currently, I don’t think it is finished yet because it throws an error saying keyword does not exist. This is the reason why I set the task to DISABLED.
-    <br>
+    Note: From EcsParameters, CloudFormation in Step 5 should support specify parameters, such as LaunchType, NetworkConfiguration, PlatformVersion, for Fargate tasks. However, currently, I don’t think it is finished yet because it throws an error saying keyword does not exist. This is the reason why I set the task to DISABLED.
+
   - #6 Manually update the task config in CloudWatch Event Rules.
     - Edit
       - Launch Type: Fargate
