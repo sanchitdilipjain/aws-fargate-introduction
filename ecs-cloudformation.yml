@@ -8,7 +8,7 @@ AWSTemplateFormatVersion: '2010-09-09'
      Type: String
 
  Resources:
-   StockCrawlerTaskSchedule:
+   CronTaskSchedule:
      Type: AWS::Events::Rule
      Properties:
        Description: "Cron every 30 mins"
